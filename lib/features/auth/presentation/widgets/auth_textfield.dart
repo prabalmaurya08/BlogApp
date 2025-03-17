@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AuthTextForm extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
+
   final bool obscurePass;
   const AuthTextForm({
     super.key,
@@ -14,6 +15,7 @@ class AuthTextForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       decoration: InputDecoration(hintText: hintText),
       obscureText: obscurePass,
 

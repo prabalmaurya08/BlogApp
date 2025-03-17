@@ -1,8 +1,10 @@
 import 'package:blog_app/core/theme/app_pallete.dart';
+import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_app/features/auth/presentation/pages/login_page.dart';
 import 'package:blog_app/features/auth/presentation/widgets/auth_button.dart';
 import 'package:blog_app/features/auth/presentation/widgets/auth_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpPage extends StatefulWidget {
   static route() => MaterialPageRoute(builder: (contex) => LoginPage());
@@ -52,7 +54,32 @@ class _SignUpPageState extends State<SignUpPage> {
                 obscurePass: true,
               ),
               SizedBox(height: 20),
-              AuthButton(btnText: "SignUp"),
+
+              // Add this somewhere in your UI temporarily to test
+              AuthButton(
+                btnText: "SignUp",
+                onPressed: () {
+                  print("Signup button clicked");
+
+                  if (formKey.currentState!.validate()) {
+                    final name = nameController.text.trim();
+                    final email = emailController.text.trim();
+                    final password = passwordController.text.trim();
+
+                    if (name.isEmpty || email.isEmpty || password.isEmpty) {
+                      print("Error: Name, email, or password cannot be empty!");
+                      return; // Stop execution if fields are empty
+                    }
+
+                    print("Signing up with: Name = $name, Email = $email");
+
+                    context.read<AuthBloc>().add(
+                      AuthSignup(name: name, email: email, password: password),
+                    );
+                  }
+                },
+              ),
+
               GestureDetector(
                 onTap: () => {Navigator.push(context, SignUpPage.route())},
                 child: RichText(

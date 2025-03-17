@@ -48,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
                 obscurePass: true,
               ),
               SizedBox(height: 20),
-              AuthButton(btnText: "SignIn"),
+              AuthButton(btnText: "SignIn", onPressed: () => {}),
               GestureDetector(
                 onTap: () => {Navigator.push(context, LoginPage.route())},
                 child: RichText(
