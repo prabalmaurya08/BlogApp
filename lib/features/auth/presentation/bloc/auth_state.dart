@@ -14,4 +14,7 @@ class AuthFailureState extends AuthState {
   AuthFailureState(this.message);
 }
 
-class AuthSuccessState extends AuthState {}
+class AuthSuccessState extends AuthState {
+  final User user;
+  AuthSuccessState({required this.user});
+}
